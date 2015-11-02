@@ -247,6 +247,10 @@ function Draggable(x,y){
 
 window.START_SIM = false;
 
+// boolean necessary for toggling between random and distance based movement
+// it's here because it needs to be reset with everything else
+window.RANDOM_MOVE = true;
+
 var draggables;
 var STATS;
 window.reset = function(){
@@ -256,6 +260,7 @@ window.reset = function(){
 		offset:0
 	};
 	START_SIM = false;
+	RANDOM_MOVE = true;
 
 	stats_ctx.clearRect(0,0,stats_canvas.width,stats_canvas.height);
 
@@ -345,6 +350,13 @@ window.render = function(){
 	lastMouseX = Mouse.x;
 	lastMouseY = Mouse.y;
 
+	// Movement type toggle button
+	if(RANDOM_MOVE){
+		document.getElementById("random_moving").classList.add("random");
+	}else{
+		document.getElementById("random_moving").classList.remove("random");
+	}
+
 }
 var stats_text = document.getElementById("stats_text");
 
@@ -396,7 +408,6 @@ window.writeStats = function(){
 	}else{
 		document.getElementById("moving").classList.remove("moving");
 	}
-
 }
 
 var doneAnimFrame = 0;
@@ -409,6 +420,8 @@ function isDone(){
 	}
 	return true;
 }
+
+
 
 function step(){
 
@@ -451,11 +464,43 @@ function step(){
 		}
 	}
 
-	// Go to a random empty spot
-	var spot = empties[Math.floor(Math.random()*empties.length)];
-	if(!spot) return;
-	shaker.gotoX = spot.x;
-	shaker.gotoY = spot.y;
+	// Allow a selection between original random movement and a smarter movement algorithm
+	//var smartMove = true;
+	if(RANDOM_MOVE){
+		// Go to a random empty spot
+		var spot = empties[Math.floor(Math.random()*empties.length)];
+		if(!spot) return;
+		shaker.gotoX = spot.x;
+		shaker.gotoY = spot.y;
+	}
+	else{
+		// Find the furthest empty spot and move there
+		// First find and store the distances between each empty spot and the current shaker
+		var distances = [];
+		for(var i = 0; i < empties.length; i ++){
+			var distanceX = Math.abs(empties[i].x - shaker.x);
+			var distanceY = Math.abs(empties[i].y - shaker.y);
+			var totalDistance = distanceX + distanceY;
+			distances.push(totalDistance);
+		}
+		// Find the index of the lowest value of totalDistance
+		// This requires the following helper function:
+		function indexOfSmallest(a) {
+			var largest = 0;
+			for (var i = 1; i < a.length; i++) {
+				if (a[i] > a[largest]) largest = i;
+			}
+			return largest;
+		}
+		var smallestDistance = indexOfSmallest(distances);
+		var closestSpot = empties[smallestDistance];
+		if(!closestSpot) return;
+		shaker.gotoX = closestSpot.x;
+		shaker.gotoY = closestSpot.y;
+	}
+
+
+
 
 }
 
