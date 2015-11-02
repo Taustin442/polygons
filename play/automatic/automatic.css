@@ -102,8 +102,9 @@ div{
 	top:3px;
 }
 
-#random_moving.random{background-position: 0 -105px;}
-/* End of movement toggling related css*/
+#random_moving{background-position: 0 -5px;}
+#random_moving.random{background-position: 0 -100px;}
+/* End of movement toggling-related styling */
 
 #reset{ background-position: 0 -104px; }
 #reset:hover{ background-position: 0 -156px; }

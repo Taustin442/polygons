@@ -350,6 +350,13 @@ window.render = function(){
 	lastMouseX = Mouse.x;
 	lastMouseY = Mouse.y;
 
+	// Movement type toggle button
+	if(RANDOM_MOVE){
+		document.getElementById("random_moving").classList.add("random");
+	}else{
+		document.getElementById("random_moving").classList.remove("random");
+	}
+
 }
 var stats_text = document.getElementById("stats_text");
 
@@ -400,13 +407,6 @@ window.writeStats = function(){
 		document.getElementById("moving").classList.add("moving");
 	}else{
 		document.getElementById("moving").classList.remove("moving");
-	}
-
-	// Movement type toggle button
-	if(RANDOM_MOVE){
-		document.getElementById("random_moving").classList.add("random");
-	}else{
-		document.getElementById("random_moving").classList.remove("random");
 	}
 }
 
