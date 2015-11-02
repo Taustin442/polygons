@@ -402,6 +402,12 @@ window.writeStats = function(){
 		document.getElementById("moving").classList.remove("moving");
 	}
 
+	// Movement type toggle button
+	if(RANDOM_MOVE){
+		document.getElementById("random_moving").classList.add("random");
+	}else{
+		document.getElementById("random_moving").classList.remove("random");
+	}
 }
 
 var doneAnimFrame = 0;
@@ -415,8 +421,7 @@ function isDone(){
 	return true;
 }
 
-// boolean necessary for toggling between random and distance based movement
-window.RANDOM_MOVE = true;
+
 
 function step(){
 
