@@ -493,10 +493,18 @@ function step(){
 			return largest;
 		}
 		var smallestDistance = indexOfSmallest(distances);
-		var closestSpot = empties[smallestDistance];
-		if(!closestSpot) return;
-		shaker.gotoX = closestSpot.x;
-		shaker.gotoY = closestSpot.y;
+		// The last polygon tends to get hung up
+		// If there's only one left, return to random sorting
+		if(shaking.length < 3) RANDOM_MOVE = true;
+		else{
+			var closestSpot = empties[smallestDistance];
+			if(!closestSpot) return;
+			shaker.gotoX = closestSpot.x;
+			shaker.gotoY = closestSpot.y;
+		}
+
+
+
 	}
 
 
