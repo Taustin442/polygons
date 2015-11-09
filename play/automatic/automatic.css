@@ -22,7 +22,7 @@ div{
 #container{
 	position: relative;
 	width:1030px;
-	height:600px;
+	height:1200px;
 }
 #canvas{
 	display: block;
@@ -33,7 +33,7 @@ div{
 	float:left;
 	margin-left: 20px;
 	font-size: 16px;
-	text-align: center;
+	text-align: left;
 }
 #stats_text{
 	position: absolute;
