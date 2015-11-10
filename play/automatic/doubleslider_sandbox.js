@@ -30,7 +30,7 @@ var whatever = new DoubleSlider(document.getElementById("slider2"),{
         {color:"#567DFF",icon:"ds_happy.png"},
         {color:"#000",icon:"ds_sad.png"}
     ],
-    values:[0.40,0.80],
+    //values:[0.30,0.30],
     onChange:function(values){
 
         // Actual values
